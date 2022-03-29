@@ -8,18 +8,23 @@ const url =
 
 export const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState();
+  const [openFavourites, setOpenFavourites] = useState(false);
+  const [movieAdded, setMovieAdded] = useState(true);
+  const [moviesList, setMoviesList] = useState([]);
+  const [favourites, setFavourites] = useState([]);
+
+  // console.log(favourites);
 
   const fetchMovies = async () => {
     setLoading(true);
     try {
       const response = await axios.get(url);
       const { results } = response.data.data;
-      console.log(results);
+      // console.log(results);
       if (results) {
-        setMovies(results);
+        setMoviesList(results);
       } else {
-        setMovies([]);
+        setMoviesList([]);
       }
       setLoading(false);
     } catch (error) {
@@ -32,7 +37,18 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <MovieContext.Provider value={{ movies, loading }}>
+    <MovieContext.Provider
+      value={{
+        moviesList,
+        loading,
+        favourites,
+        setFavourites,
+        openFavourites,
+        setOpenFavourites,
+        movieAdded,
+        setMovieAdded,
+      }}
+    >
       {children}
     </MovieContext.Provider>
   );
