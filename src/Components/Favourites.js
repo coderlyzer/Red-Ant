@@ -1,8 +1,15 @@
 import React from "react";
-import { useGlobalContext } from "../context";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  close_favourites,
+  remove_favourite_movie,
+} from "../actions/moveActionTypes";
 
 const Favourites = () => {
-  const { favourites, openFavourites, setOpenFavourites } = useGlobalContext();
+  const { openFavourites, favourites } = useSelector(
+    (state) => state.movieReducer
+  );
+  const dispatch = useDispatch();
   return (
     <div
       className={`${
@@ -15,7 +22,7 @@ const Favourites = () => {
         <h2>Favourites</h2>
         <button
           className="close js-close"
-          onClick={() => setOpenFavourites(false)}
+          onClick={() => dispatch(close_favourites())}
         ></button>
       </div>
       <div className="favourites-content">
@@ -24,7 +31,13 @@ const Favourites = () => {
           return (
             <div key={movie.id}>
               <ul className="favourites-list">
-                <li>{movie.title}</li>
+                <li>
+                  {movie.title}
+                  <button
+                    className="favourites-list remove"
+                    onClick={() => dispatch(remove_favourite_movie(movie.id))}
+                  ></button>
+                </li>
               </ul>
             </div>
           );
