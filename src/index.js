@@ -8,8 +8,12 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { movieReducer } from "./reducers/movieReducer";
 
+// Customer Reducer
 const rootReducers = combineReducers({ movieReducer });
+
+// Store
 const store = createStore(rootReducers, compose(applyMiddleware(thunk)));
+
 ReactDOM.render(
   <Provider store={store}>
     <AppProvider>

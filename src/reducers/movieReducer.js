@@ -1,6 +1,5 @@
 import {
   ADD_FAVOURITE_MOVIE,
-  CHANGE_BUTTON,
   CLOSE_FAVOURITES,
   FETCH_ALL,
   LOADING,
@@ -8,6 +7,7 @@ import {
   REMOVE_FAVOURITE_MOVIE,
 } from "../actions/movieActions";
 
+// initialState
 const initialState = {
   loading: true,
   openFavourites: false,
@@ -15,8 +15,9 @@ const initialState = {
   moviesList: [],
   favourites: [],
   movies: [],
-  change: false,
 };
+
+// movie reducer for handling the actions
 
 export const movieReducer = (state = initialState, action) => {
   if (action.type === LOADING) {
@@ -55,7 +56,6 @@ export const movieReducer = (state = initialState, action) => {
     return {
       ...state,
       loading: false,
-      change: !state.change,
       favourites: [...newFavourites],
     };
   }

@@ -1,6 +1,5 @@
 import {
   ADD_FAVOURITE_MOVIE,
-  CHANGE_BUTTON,
   CLOSE_FAVOURITES,
   FETCH_ALL,
   LOADING,
@@ -8,6 +7,7 @@ import {
   REMOVE_FAVOURITE_MOVIE,
 } from "./movieActions";
 
+// Action Creators
 export const loading_movies = () => {
   return {
     type: LOADING,
@@ -43,13 +43,6 @@ export const add_favourite_movie = (movie) => {
 export const remove_favourite_movie = (id) => {
   return {
     type: REMOVE_FAVOURITE_MOVIE,
-    payload: id,
-  };
-};
-
-export const change_button = (id) => {
-  return {
-    type: CHANGE_BUTTON,
     payload: id,
   };
 };
